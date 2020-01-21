@@ -18,6 +18,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { environment } from 'src/environments/environment';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { environment } from 'src/environments/environment';
     AddClientComponent,
     NotFoundComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
