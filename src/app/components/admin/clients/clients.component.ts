@@ -10,6 +10,7 @@ import { Client } from 'src/app/models/Clients';
 export class ClientsComponent implements OnInit {
 
   clients: Client[];
+  totalOwed: number;
 
   constructor(private clientService: ClientService) { }
 
@@ -17,10 +18,18 @@ export class ClientsComponent implements OnInit {
     this.clientService.getClients().subscribe(
       clients => {
         this.clients = clients;
+        this.getTotalOwed();
         console.log(this.clients);
       }
     );
 
+  }
+
+  getTotalOwed() {
+    // method to calculate balance owed
+    this.totalOwed = this.clients.reduce((total, client) => {
+      return total + client.balance;
+    }, 0);
   }
 
 }

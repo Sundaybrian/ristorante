@@ -1,13 +1,15 @@
 <div class="row">
   <div class="col-md-6">
-    <h2><i class="fa fa-users"></i>Clients</h2>
+    <h3><i class="fa fa-users"></i>Clients</h3>
   </div>
   <div class="col-md-6">
     <h5 class="text-right text-secondary">Total Owed: {{totalOwed  | currency:"KSH":"symbol"}}</h5>
   </div>
 </div>
-<table mdbTable *ngIf="clients?.length > 0 ;else noClients" class="table-striped">
-  <thead class="grey lighten-1 black-text">
+
+<table mdbTable *ngIf="clients?.length > 0 ;else noClients" striped="true" hover="true" >
+  <caption>List of clients</caption>
+  <thead class="info-color lighten-1 black-text">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
@@ -25,7 +27,7 @@
       <td>{{el.email}}</td>
       <td>{{el.phone}}</td>
       <td>{{el.balance  | currency:"KSH":"symbol"}}</td>
-      <td> <a routerLink="client/{{el.id}}" class="btn btn-secondary">Details</a></td>
+      <td> <a routerLink="client/{{el.key}}" class="btn btn-secondary">Details</a></td>
     </tr>
   </tbody>
 </table>
