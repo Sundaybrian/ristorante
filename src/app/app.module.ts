@@ -1,10 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,8 +22,8 @@ import { AddClientComponent } from './components/admin/add-client/add-client.com
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
+    FlashMessagesModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
