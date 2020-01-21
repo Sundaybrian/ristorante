@@ -32,6 +32,8 @@ export class ClientService {
         )
       );
 
+      return this.clients;
+
     }
 
 
