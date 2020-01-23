@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AngularFireModule } from '@angular/fire';
@@ -44,7 +43,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule,
     AppRoutingModule,
     FlashMessagesModule.forRoot(),
-    MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

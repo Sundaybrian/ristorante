@@ -7,9 +7,9 @@
   </div>
 </div>
 
-<table mdbTable *ngIf="clients?.length > 0 ;else noClients" striped="true" hover="true" >
+<table *ngIf="clients?.length > 0 ;else noClients" class="table table-striped table-hover" >
   <caption>List of clients</caption>
-  <thead class="info-color lighten-1 black-text">
+  <thead class="thead-primary">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr mdbTableCol *ngFor="let el of clients; let i=index">
+    <tr *ngFor="let el of clients; let i=index">
       <th scope="row">{{i}}</th>
       <td>{{el.firstName}} {{el.lastName}}</td>
       <td>{{el.email}}</td>
