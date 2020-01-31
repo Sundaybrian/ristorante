@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from '../../../models/Clients';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { ClientService } from 'src/app/services/client.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +30,9 @@ disableBalanceOnAdd = true;
 @ViewChild('clientForm', {static: false}) form: any;
 
   constructor(
-    private flash: FlashMessagesService
+    private flash: FlashMessagesService,
+    private clientService: ClientService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,14 +45,15 @@ disableBalanceOnAdd = true;
       value.balance = 0;
     }
 
-    // add new client 
+    // add new client
+    this.clientService.newClient(value);
 
     // show flash message
     this.flash.show('Client created successfully',{
       cssClass: 'alert-success', timeout: 4000
     });
     // redirect to dashboard
-
+    this.router.navigate(['/']);
 
   }
 
