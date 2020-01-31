@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Client } from '../../../models/Clients';
 import { Router, ActivatedRoute , Params} from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 // import 'rxjs/add/operator/take';
 
 
@@ -14,6 +15,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ClientsDetailsComponent implements OnInit {
   id: string;
   client: Client;
+  clientRef: any;
   hasBalance = false;
   showBalanceUpdateInput = false;
 
@@ -21,7 +23,8 @@ export class ClientsDetailsComponent implements OnInit {
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute,
-    private flash: FlashMessagesService
+    private flash: FlashMessagesService,
+    private db: AngularFireDatabase
   ) { }
 
   ngOnInit() {
@@ -29,14 +32,26 @@ export class ClientsDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     // Get the client associated with the id
-    this.client = this.clientService.getClient(this.id);
+    this.getClient(this.id);
 
-    // set balance
-    if (this.client.balance > 0) {
-      this.hasBalance = true;
+  }
 
-    }
-  
+  getClient(id: string) {
+    this.clientRef = this.db.object('/users/clients/' + id);
+
+    this.clientRef.snapshotChanges().subscribe(action => {
+      const data = action.payload.val() as Client;
+      data.key = action.key;
+
+      this.client = data;
+
+      // set balance
+      if (this.client.balance > 0) {
+        this.hasBalance = true;
+
+      }
+
+    });
 
   }
 
