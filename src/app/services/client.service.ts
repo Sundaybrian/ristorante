@@ -68,5 +68,10 @@ export class ClientService {
 
     }
 
+    updateClient(client: Client) {
+      this.clientRef = this.db.object('/users/clients/' + client.key);
+      this.clientRef.update(client);
+    }
+
 
 }
