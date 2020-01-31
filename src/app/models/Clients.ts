@@ -7,4 +7,6 @@ export interface Client{
   balance?: number;
   businessLocation?: string;
   businessName?: string;
+  isVendor?: boolean;
+  isActive?: boolean;
 }
