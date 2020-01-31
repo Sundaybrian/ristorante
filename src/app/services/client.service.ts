@@ -18,6 +18,7 @@ export class ClientService {
     public afAuth: AngularFireAuth,
     public db: AngularFireDatabase
     ) {
+      // reference to the clients tree
       this.clientsRef = this.db.list('users/clients/');
 
 
@@ -34,6 +35,11 @@ export class ClientService {
 
       return this.clients;
 
+    }
+
+    newClient(client: Client) {
+      // adding a client to the clients tree
+      this.clientsRef.push(client);
     }
 
 
