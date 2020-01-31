@@ -29,7 +29,7 @@ export class ClientsComponent implements OnInit {
     // method to calculate balance owed
     // initial total is zero,loop against each cleint sium
     this.totalOwed = this.clients.reduce((total, client) => {
-      return total + client.balance;
+      return total + parseFloat(client.balance.toString());
     }, 0);
   }
 
