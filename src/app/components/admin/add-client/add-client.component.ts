@@ -45,11 +45,15 @@ disableBalanceOnAdd = true;
       value.balance = 0;
     }
 
+    // hijack the value to pass the isActive and isVendor value
+    value.isActive = false;
+    value.isVendor = true;
+
     // add new client
     this.clientService.newClient(value);
 
     // show flash message
-    this.flash.show('Client created successfully',{
+    this.flash.show('Client created successfully', {
       cssClass: 'alert-success', timeout: 4000
     });
     // redirect to dashboard
