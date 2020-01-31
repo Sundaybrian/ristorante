@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Client } from '../../../models/Clients';
 import { Router, ActivatedRoute , Params} from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+// import 'rxjs/add/operator/take';
 
 
 @Component({
@@ -28,11 +29,17 @@ export class ClientsDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     // Get the client associated with the id
+    this.client = this.clientService.getClient(this.id);
 
-    this.clientService.getClients(this.id).subscribe(client => {
-      this.client = client;
-    });
+    // set balance
+    if (this.client.balance > 0) {
+      this.hasBalance = true;
+
+    }
+  
 
   }
+
+
 
 }
