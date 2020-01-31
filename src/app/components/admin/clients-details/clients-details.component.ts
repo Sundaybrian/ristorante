@@ -61,6 +61,8 @@ export class ClientsDetailsComponent implements OnInit {
   });
   }
 
-
+  onDeleteClick() {
+    console.log('clicked');
+  }
 
 }
