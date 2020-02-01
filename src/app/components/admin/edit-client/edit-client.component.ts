@@ -56,8 +56,8 @@ export class EditClientComponent implements OnInit {
 
   }
 
-  onSubmit({value, valid}: {value: Client, valid: booleab}) {
-    
+  onSubmit({value, valid}: {value: Client, valid: boolean}) {
+
   }
 
 }
