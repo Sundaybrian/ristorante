@@ -62,7 +62,18 @@ export class ClientsDetailsComponent implements OnInit {
   }
 
   onDeleteClick() {
-    console.log('clicked');
+    if ( confirm(`Are you sure you want to delete ${this.client.firstName} ? this cannot be undone!`)) {
+      // delete the client
+    this.clientService.deleteClient(this.client);
+    // show flash message
+    this.flash.show('Client removed', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+
+    // navigate to dashboard
+    this.router.navigate(['/']);
+
+    }
   }
 
 }
