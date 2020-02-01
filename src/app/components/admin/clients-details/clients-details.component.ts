@@ -57,12 +57,12 @@ export class ClientsDetailsComponent implements OnInit {
 
   updateBalance() {
     this.clientService.updateClient(this.client);
-    this.flash.show('Balance Updated',{ cssClass: 'alert-success', timeout: 4000
+    this.flash.show('Balance Updated', { cssClass: 'alert-success', timeout: 4000
   });
   }
 
   onDeleteClick() {
-    if ( confirm(`Are you sure you want to delete ${this.client.firstName} ? this cannot be undone!`)) {
+    if ( confirm(`Are you sure you want to delete client ${this.client.firstName} ? this cannot be undone!`)) {
       // delete the client
     this.clientService.deleteClient(this.client);
     // show flash message

@@ -73,5 +73,11 @@ export class ClientService {
       this.clientRef.update(client);
     }
 
+    deleteClient(client: Client) {
+      this.clientRef = this.db.object('/users/clients/' + client.key);
+      this.clientRef.remove();
+    }
+
+
 
 }
