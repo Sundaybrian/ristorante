@@ -58,6 +58,18 @@ export class EditClientComponent implements OnInit {
 
   onSubmit({value, valid}: {value: Client, valid: boolean}) {
 
+    // Add client id
+    value.key = this.id;
+
+    // update client
+    this.clientService.updateClient(value);
+    // show flash message
+    this.flash.show('Client Updated', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+    // navigate to client details
+    this.router.navigate(['/client/' + this.id]);
+
   }
 
 }
