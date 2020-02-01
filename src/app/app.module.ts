@@ -22,6 +22,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthService } from './services/auth.service';
+import { ClientService } from './services/client.service';
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AuthService, ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
