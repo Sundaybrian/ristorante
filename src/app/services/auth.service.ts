@@ -27,4 +27,9 @@ export class AuthService {
       map( auth => auth)
     );
   }
+
+  logout() {
+    // logout a user
+    this.afAuth.auth.signOut();
+  }
 }
