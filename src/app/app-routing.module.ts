@@ -8,6 +8,7 @@ import { EditClientComponent } from './components/admin/edit-client/edit-client.
 import { ClientsDetailsComponent } from './components/admin/clients-details/clients-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'client/add', component: AddClientComponent , canActivate: [AuthGuard]},
   { path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]},
   { path: 'client/:id', component: ClientsDetailsComponent , canActivate: [AuthGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent}
 ];
 

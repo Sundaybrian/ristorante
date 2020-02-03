@@ -22,7 +22,6 @@ export class ClientService {
       // reference to the clients tree
       this.clientsRef = this.db.list('users/clients/');
 
-
     }
 
 

@@ -24,6 +24,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
 import { ClientService } from './services/client.service';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ClientService } from './services/client.service';
     NotFoundComponent,
     NavbarComponent,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

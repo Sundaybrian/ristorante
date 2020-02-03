@@ -21,6 +21,14 @@ export class AuthService {
     });
   }
 
+  register(email: string, password: string) {
+    // method to register a vendor
+    return new Promise((resolve, reject) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(email, password).then( userData => resolve(userData),
+      err => reject(err));
+    });
+  }
+
   getAuth() {
     // return authstate if user is logged in
     return this.afAuth.authState.pipe(
