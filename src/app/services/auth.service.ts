@@ -31,9 +31,9 @@ export class AuthService {
 
   getAuth() {
     // return authstate if user is logged in
-    return this.afAuth.authState.pipe(
-      map( auth => auth)
-    );
+    // null if user is not logged in
+    // user : firebase.User if logged in
+    return this.afAuth.authState;
   }
 
   logout() {

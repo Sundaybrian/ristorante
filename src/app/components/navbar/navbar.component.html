@@ -7,12 +7,12 @@
 
     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav">
-            <a href="#" *ngIf="isLoggedIn" class="nav-item nav-link">{{ currentUser}}</a>
+            <a href="#" *ngIf="currentUser$ | async as user" class="nav-item nav-link">{{ user.email}}</a>
             <div class="nav-item dropdown" *ngIf="isLoggedIn">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ currentUser}}</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage</a>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">Inbox</a>
-                    <a href="#" class="dropdown-item">Sent</a>
+                    <a routerLink="/vendor/products" class="dropdown-item">Manage Products</a>
+                    <a routerLink="/vendor/orders" class="dropdown-item">Manage Orders</a>
                     <a href="#" class="dropdown-item">Drafts</a>
                 </div>
             </div>
