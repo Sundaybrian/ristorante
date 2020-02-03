@@ -9,6 +9,9 @@ import { ClientsDetailsComponent } from './components/admin/clients-details/clie
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ProductsComponent } from './components/vendor/products/products.component';
+import { OrdersComponent } from './components/vendor/orders/orders.component';
+import { ProfileComponent } from './components/vendor/profile/profile.component';
 
 
 const routes: Routes = [
@@ -18,6 +21,9 @@ const routes: Routes = [
   { path: 'client/add', component: AddClientComponent , canActivate: [AuthGuard]},
   { path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]},
   { path: 'client/:id', component: ClientsDetailsComponent , canActivate: [AuthGuard]},
+  { path: 'vendor/products', component: ProductsComponent, canActivate: [AuthGuard]},
+  { path: 'vendors/orders', component: OrdersComponent, canActivate: [AuthGuard]},
+  { path: 'vendors/profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent}
 ];

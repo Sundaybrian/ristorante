@@ -70,9 +70,8 @@ export class ClientService {
 
     newClient2(uid: string, client: Client) {
       // will be used to replace the old client later on
-      console.log(client);
       delete client.password;
-      this.db.object('users/clients/' + uid).set(client);
+      this.db.object('users/clients/' + uid).update(client);
       // this.clientRef.ref(uid).set(client);
 
     }

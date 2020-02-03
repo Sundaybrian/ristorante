@@ -25,6 +25,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
 import { ClientService } from './services/client.service';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ProductsComponent } from './components/vendor/products/products.component';
+import { OrdersComponent } from './components/vendor/orders/orders.component';
+import { ProfileComponent } from './components/vendor/profile/profile.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { SettingsComponent } from './components/settings/settings.component';
     NavbarComponent,
     SidebarComponent,
     DashboardComponent,
-    SettingsComponent
+    SettingsComponent,
+    ProductsComponent,
+    OrdersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

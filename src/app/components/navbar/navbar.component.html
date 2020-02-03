@@ -9,7 +9,7 @@
         <div class="navbar-nav">
             <a href="#" *ngIf="isLoggedIn" class="nav-item nav-link">{{ currentUser}}</a>
             <div class="nav-item dropdown" *ngIf="isLoggedIn">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ currentUser}}</a>
                 <div class="dropdown-menu">
                     <a href="#" class="dropdown-item">Inbox</a>
                     <a href="#" class="dropdown-item">Sent</a>
