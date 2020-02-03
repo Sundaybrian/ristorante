@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject  } from '@angular/fire/database';
 import { Client } from '../models/Clients';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { map } from 'rxjs/operators';
 export class ClientService {
   clientsRef: AngularFireList<any>;
   clients: Observable<any[]>;
-  client: any;
+  client: Client;
   clientRef: any;
   vendorsRef: any;
 
@@ -48,7 +49,7 @@ export class ClientService {
       this.clientRef = this.db.object('users/clients/' + id);
 
       this.clientRef.snapshotChanges().
-     subscribe(
+      subscribe(
        action => {
 
          if (action.payload.exists === false) {
@@ -69,10 +70,11 @@ export class ClientService {
     }
 
     newClient2(uid: string, client: Client) {
-      // will be used to replace the old client later on
+      // delete password for the client obj
       delete client.password;
+      // add to the client trees
       this.db.object('users/clients/' + uid).update(client);
-      // this.clientRef.ref(uid).set(client);
+
 
     }
 
@@ -84,6 +86,12 @@ export class ClientService {
     deleteClient(client: Client) {
       this.clientRef = this.db.object('/users/clients/' + client.key);
       this.clientRef.remove();
+    }
+
+    get(uid: string): AngularFireObject<any> {
+      // return user object
+      return this.db.object('/users/clients/' + uid);
+
     }
 
 

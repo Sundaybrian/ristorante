@@ -12,6 +12,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ProductsComponent } from './components/vendor/products/products.component';
 import { OrdersComponent } from './components/vendor/orders/orders.component';
 import { ProfileComponent } from './components/vendor/profile/profile.component';
+import { AdminAuthGuard } from './guards/adminauth.guard';
 
 
 const routes: Routes = [
@@ -31,6 +32,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, AdminAuthGuard]
 })
 export class AppRoutingModule { }
