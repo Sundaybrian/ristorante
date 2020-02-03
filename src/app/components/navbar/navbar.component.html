@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav">
             <a href="#" *ngIf="currentUser$ | async as user" class="nav-item nav-link">{{ user.email}}</a>
-            <div class="nav-item dropdown" *ngIf="isLoggedIn">
+            <div class="nav-item dropdown" *ngIf="(currentUser$ | async )">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage</a>
                 <div class="dropdown-menu">
                     <a routerLink="/vendor/products" class="dropdown-item">Manage Products</a>
@@ -26,11 +26,11 @@
             </div>
         </form> -->
         <div class="navbar-nav">
-          <ng-container  *ngIf="isLoggedIn">
+          <ng-container  *ngIf="(currentUser$ | async )">
             <a href="#" class="nav-item nav-link">Settings</a>
             <a (click)="onLogoutClick()" href="#" class="nav-item nav-link">Logout</a>
           </ng-container>
-          <ng-container *ngIf="!isLoggedIn">
+          <ng-container *ngIf="!(currentUser$ | async )">
             <a routerLink="/login" class="nav-item nav-link">Login</a>
             <a routerLink="/register" class="nav-item nav-link">Register</a>
           </ng-container>
