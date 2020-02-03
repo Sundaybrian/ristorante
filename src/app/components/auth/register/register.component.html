@@ -8,7 +8,50 @@
           </span>
          Register
         </h1>
-        <form (submit)="onSubmit()">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            #clientFirstName="ngModel"
+            [(ngModel)]="firstName"
+            [ngClass]="{'is-invalid':clientFirstName.errors && clientFirstName.touched}"
+            minlength="2"
+            required
+            >
+            <div [hidden]="!clientFirstName.errors?.required" class="invalid-feedback">
+              First name is required
+            </div>
+            <div [hidden]="!clientFirstName.errors?.minlength" class="invalid-feedback">
+              Must be atleast 2 characters
+            </div>
+          </div>
+
+          <!-- last name -->
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            #clientLastName="ngModel"
+            [(ngModel)]="lastName"
+            [ngClass]="{'is-invalid':clientLastName.errors && clientLastName.touched}"
+            minlength="2"
+            required
+            >
+            <div [hidden]="!clientLastName.errors?.required" class="invalid-feedback">
+              Last name is required
+            </div>
+            <div [hidden]="!clientLastName.errors?.minlength" class="invalid-feedback">
+              Must be atleast 2 characters
+            </div>
+
+          </div>
+          <!--last name  -->
+
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" [(ngModel)]="email" required class="form-control">
@@ -17,7 +60,7 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" [(ngModel)]="password" required>
           </div>
-          <input type="submit" value="Register" class="btn btn-primary btn-block">
+          <input type="submit" value="Register" class="btn btn-primary btn-block" [disabled]="!f.valid">
         </form>
       </div>
     </div>

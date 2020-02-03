@@ -67,6 +67,12 @@ export class ClientService {
 
     }
 
+    newClient2(uid: string, client: Client) {
+      // will be used to replace the old client later on
+      this.clientRef.ref(uid).set(client);
+
+    }
+
     updateClient(client: Client) {
       this.clientRef = this.db.object('/users/clients/' + client.key);
       this.clientRef.update(client);
