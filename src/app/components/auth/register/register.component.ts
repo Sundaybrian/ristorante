@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
+  onSubmit({value , valid}: { value: Partial<Client>, valid: boolean}) {
 
     // call the register method to register a user
     // later on it will extended to check on the user type
@@ -37,18 +37,16 @@ export class RegisterComponent implements OnInit {
       this.flash.show('You are now registered and logged in', {
         cssClass: 'alert-success', timeout: 4000
       });
-    
 
-      // send verification email to the now logged in user
-      // this.afAuth.auth.currentUser.sendEmailVerification().then(() => {
-      //   this.flash.show('Check your email to verify your account', {
-      //     cssClass: 'alert-success', timeout: 4000
-      //   });
-      // }).catch(err => {
-      //   this.flash.show(err.message, {
-      //     cssClass: 'alert-danger', timeout: 4000
-      //   });
-      // });
+      // hijack the value to pass the isActive and isVendor value
+      value.key = this.afAuth.auth.currentUser.uid;
+      value.balance = 0;
+      value.email = this.afAuth.auth.currentUser.email;
+      value.isVendor = true;
+      value.isActive = false;
+
+      // create a client
+      this.clientService.newClient2(value.key, value);
 
       // navigate to homepage
       this.router.navigate(['/']);
