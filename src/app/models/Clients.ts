@@ -9,4 +9,5 @@ export interface Client{
   businessName?: string;
   isVendor?: boolean;
   isActive?: boolean;
+  password?: string;
 }

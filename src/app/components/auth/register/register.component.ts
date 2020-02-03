@@ -31,6 +31,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit({value , valid}: { value: Partial<Client>, valid: boolean}) {
 
+    console.log(value);
+
     // call the register method to register a user
     // later on it will extended to check on the user type
     this.authService.register(this.email, this.password).then(response => {
