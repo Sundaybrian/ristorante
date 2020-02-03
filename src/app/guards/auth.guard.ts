@@ -16,11 +16,11 @@ export class AuthGuard implements CanActivate {
 
   }
   // auth guard to protect routes if not logged in
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.afAuth.authState.pipe(
       map( auth => {
         if (!auth) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url}});
           return false;
 
         } else {
