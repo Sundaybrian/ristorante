@@ -30,6 +30,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    // fetch the categories for the meals
     this.categories$ = this.categoriesService.getCategories();
 
     this.id = this.route.snapshot.paramMap.get('id');
@@ -49,15 +50,26 @@ export class ProductFormComponent implements OnInit {
   onSubmit(product) {
     // get currentUser id
     const userID = this.authService.getUserID();
-    // create a product in firebase
-    this.productService.create(product, userID);
-    // show flash message
-    // show flash message
-    this.flash.show('Product created succesfully', {
-      cssClass: 'alert-success',
-      timeout: 4000
-    });
-    // redirect to vendor dashboard
+    if ( this.id) {
+      // if we have an id,means we are updating a product
+      this.productService.updateProduct(userID, this.id, product);
+      this.flash.show('Product updated succesfully', {
+        cssClass: 'alert-success',
+        timeout: 5000
+      });
+    } else {
+
+      // else create a product in firebase
+      this.productService.create(product, userID);
+      // show flash message
+      // show flash message
+      this.flash.show('Product created succesfully', {
+        cssClass: 'alert-success',
+        timeout: 4000
+      });
+      // redirect to vendor dashboard
+    }
+     // navigate to products page
     this.router.navigate(['/vendor/products/']);
   }
 }

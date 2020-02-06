@@ -22,7 +22,7 @@ export class ProductService {
 
   updateProduct(userID, productID, product) {
     // updating a vendor product
-    this.db.object('/products/' + userID + '/' + productID).update(product);
+    return this.db.object('/products/' + userID + '/' + productID).update(product);
   }
 
   getAll(userID) {
