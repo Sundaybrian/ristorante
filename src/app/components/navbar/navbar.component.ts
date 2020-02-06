@@ -4,6 +4,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Observable } from "rxjs";
 import * as firebase from "firebase";
+import { Client } from 'src/app/models/Clients';
 
 @Component({
   selector: "app-navbar",
@@ -14,6 +15,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean;
   currentUser$: Observable<firebase.User>;
   showRegister: boolean;
+  userObj: Client;
 
   constructor(
     private router: Router,
@@ -25,6 +27,7 @@ export class NavbarComponent implements OnInit {
     this.currentUser$ = this.authService.getAuth();
     if (this.currentUser$) {
       this.isLoggedIn = true;
+      this.userObj = this.authService.userObj;
     } else {
       this.isLoggedIn = false;
     }

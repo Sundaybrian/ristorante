@@ -5,12 +5,14 @@ import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { ClientService } from './client.service';
 import { Router } from '@angular/router';
+import { Client } from '../models/Clients';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   user$: Observable<firebase.User>;
+  userObj: Client;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -54,6 +56,8 @@ export class AuthService {
     // check type of user and redirect accordingly
     const client = this.clientService.get(uid);
     client.valueChanges().subscribe(user => {
+      // saving user data to userObj,who knows a neeed might arise
+      this.userObj = user;
       if ( user["isAdmin"] == true) {
         // is admin to homepage
         this.router.navigate(['/']);
