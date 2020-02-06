@@ -29,6 +29,7 @@ import { ProductsComponent } from './components/vendor/products/products.compone
 import { OrdersComponent } from './components/vendor/orders/orders.component';
 import { ProfileComponent } from './components/vendor/profile/profile.component';
 import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
+import { CategoriesService } from './services/categories.service';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { ProductFormComponent } from './components/vendor/product-form/product-f
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [AuthService, ClientService],
+  providers: [AuthService, ClientService, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
