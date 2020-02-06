@@ -28,6 +28,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ProductsComponent } from './components/vendor/products/products.component';
 import { OrdersComponent } from './components/vendor/orders/orders.component';
 import { ProfileComponent } from './components/vendor/profile/profile.component';
+import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ProfileComponent } from './components/vendor/profile/profile.component'
     SettingsComponent,
     ProductsComponent,
     OrdersComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
