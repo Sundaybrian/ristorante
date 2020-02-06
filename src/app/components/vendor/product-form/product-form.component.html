@@ -1,64 +1,87 @@
-<form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input
-    #title="ngModel"
-    ngModel
-    type="text"
-    name="title"
-    class="form-control"
-    [ngClass]="{'is-invalid':title.errors && title.touched}"
-    required
-     />
-     <div [hidden]="!title.errors?.required" class="invalid-feedback">
-      Title for the meal is required
+<div class="row">
+  <div class="col-md-6">
+    <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+        #title="ngModel"
+        ngModel
+        type="text"
+        name="title"
+        class="form-control"
+        [ngClass]="{'is-invalid':title.errors && title.touched}"
+        required
+         />
+         <div [hidden]="!title.errors?.required" class="invalid-feedback">
+          Title for the meal is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Ksh</span>
+          </div>
+          <input
+          type="number"
+          #price="ngModel"
+          ngModel
+          name="price"
+          class="form-control"
+          [ngClass]="{'is-invalid':price.errors && price.touched}"
+          [min]="0"
+          required
+           />
+           <div [hidden]="!price.errors?.required" class="invalid-feedback">
+            Price is required
+          </div>
+          <div [hidden]="!price.errors?.min" class="invalid-feedback">
+            Price should be 0 or higher
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select
+        id="category"
+        #category="ngModel"
+        name="category"
+        ngModel
+        class="form-control"
+        [ngClass]="{'is-invalid':category.errors && category.touched}"
+        required
+        >
+          <option value=""></option>
+          <option *ngFor="let c of categories$ | async " [value]="c.key">{{ c.name }}</option>
+        </select>
+        <div [hidden]="!category.errors?.required" class="invalid-feedback">
+          Category is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image Url</label>
+        <input
+        type="text"
+        #imageUrl="ngModel"
+        name="imageUrl"
+        ngModel
+        class="form-control"
+          />
+      </div>
+      <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
+    </form>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="card" style="width: 18rem;">
+      <img [src]=" imageUrl.value" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ title.value }}</h5>
+        <p class="card-text">{{ price.value | currency:'KSH':'symbol'}}</p>
+
+      </div>
     </div>
   </div>
-  <div class="form-group">
-    <label for="price">Price</label>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Ksh</span>
-      </div>
-      <input
-      type="number"
-      #price="ngModel"
-      ngModel
-      name="price"
-      class="form-control"
-      [ngClass]="{'is-invalid':price.errors && price.touched}"
-      [min]="0"
-      required
-       />
-       <div [hidden]="!price.errors?.required" class="invalid-feedback">
-        Price is required
-      </div>
-      <div [hidden]="!price.errors?.min" class="invalid-feedback">
-        Price should be 0 or higher
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="category">Category</label>
-    <select
-    id="category"
-    #category="ngModel"
-    name="category"
-    ngModel
-    class="form-control"
-    [ngClass]="{'is-invalid':category.errors && category.touched}"
-    required
-    >
-      <option value=""></option>
-      <option *ngFor="let c of categories$ | async " [value]="c.key">{{ c.name }}</option>
-    </select>
-    <div [hidden]="!category.errors?.required" class="invalid-feedback">
-      Category is required
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="imageUrl">Image Url</label>
-    <input type="text" name="imageUrl" ngModel class="form-control" />
-  </div>
-  <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
-</form>
+</div>
+
