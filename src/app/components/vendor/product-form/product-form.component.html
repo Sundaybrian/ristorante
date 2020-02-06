@@ -1,7 +1,18 @@
 <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
   <div class="form-group">
     <label for="title">Title</label>
-    <input ngModel type="text" name="title" class="form-control" />
+    <input
+    #title="ngModel"
+    ngModel
+    type="text"
+    name="title"
+    class="form-control"
+    [ngClass]="{'is-invalid':title.errors && title.touched}"
+    required
+     />
+     <div [hidden]="!title.errors?.required" class="invalid-feedback">
+      Title for the meal is required
+    </div>
   </div>
   <div class="form-group">
     <label for="price">Price</label>
@@ -9,15 +20,37 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Ksh</span>
       </div>
-      <input type="number"  ngModel name="price" class="form-control" />
+      <input
+      type="number"
+      #price="ngModel"
+      ngModel
+      name="price"
+      class="form-control"
+      [ngClass]="{'is-invalid':price.errors && price.touched}"
+      required
+       />
+       <div [hidden]="!price.errors?.required" class="invalid-feedback">
+        Price is required
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" name="category" ngModel class="form-control">
+    <select
+    id="category"
+    #category="ngModel"
+    name="category"
+    ngModel
+    class="form-control"
+    [ngClass]="{'is-invalid':category.errors && category.touched}"
+    required
+    >
       <option value=""></option>
       <option *ngFor="let c of categories$ | async " [value]="c.key">{{ c.name }}</option>
     </select>
+    <div [hidden]="!category.errors?.required" class="invalid-feedback">
+      Category is required
+    </div>
   </div>
   <div class="form-group">
     <label for="imageUrl">Image Url</label>
