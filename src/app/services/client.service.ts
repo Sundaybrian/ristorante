@@ -45,6 +45,8 @@ export class ClientService {
     }
 
     getClient(id: string) {
+      // client data
+      let user: Client;
       // Get a single client with id
       this.clientRef = this.db.object('users/clients/' + id);
 
@@ -59,13 +61,13 @@ export class ClientService {
            const data = action.payload.val() as Client;
            data.key = action.payload.key;
           // setting the client data
+           user = data;
            this.client = data;
          }
        }
      );
-
-      return this.client;
-
+   
+      return user;
 
     }
 

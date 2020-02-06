@@ -38,7 +38,7 @@ export class ClientsDetailsComponent implements OnInit {
 
   getClient(id: string) {
     this.clientRef = this.db.object('/users/clients/' + id);
-
+    
     this.clientRef.snapshotChanges().subscribe(action => {
       const data = action.payload.val() as Client;
       data.key = action.key;

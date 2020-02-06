@@ -16,12 +16,12 @@ import { AdminAuthGuard } from './guards/adminauth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard,]},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'client/add', component: AddClientComponent , canActivate: [AuthGuard]},
-  { path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]},
-  { path: 'client/:id', component: ClientsDetailsComponent , canActivate: [AuthGuard]},
+  { path: 'client/edit/:id', component: EditClientComponent, canActivate: [AuthGuard, ]},
+  { path: 'client/:id', component: ClientsDetailsComponent , canActivate: [AuthGuard,AdminAuthGuard]},
   { path: 'vendor/products', component: ProductsComponent, canActivate: [AuthGuard]},
   { path: 'vendors/orders', component: OrdersComponent, canActivate: [AuthGuard]},
   { path: 'vendors/profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
