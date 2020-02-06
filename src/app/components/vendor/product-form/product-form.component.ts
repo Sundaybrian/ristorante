@@ -31,7 +31,7 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit(product) {
     // get currentUser id
-    const userID = this.authService.userObj.key;
+    const userID = this.authService.getUserID();
     // create a product in firebase
     this.productService.create(product, userID);
     // show flash message
@@ -40,7 +40,7 @@ export class ProductFormComponent implements OnInit {
       cssClass: 'alert-success', timeout: 4000
     });
     // redirect to vendor dashboard
-    this.router.navigate(['/vendor/products/' + userID]);
+    this.router.navigate(['/vendor/products/']);
 
 
   }
