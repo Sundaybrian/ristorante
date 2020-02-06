@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
+import { ClientService } from './client.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
+    public clientService: ClientService,
+    public router: Router
 
   ) {
     this.user$ = afAuth.authState;
@@ -43,5 +47,21 @@ export class AuthService {
   logout() {
     // logout a user
     this.afAuth.auth.signOut();
+  }
+
+
+  afterSignIn(uid) {
+    // check type of user and redirect accordingly
+    const client = this.clientService.get(uid);
+    client.valueChanges().subscribe(user => {
+      if ( user["isAdmin"] == true) {
+        // is admin to homepage
+        this.router.navigate(['/']);
+      } else {
+        // is vendor to vendor profile page
+        this.router.navigate(['/vendors/profile/' + uid]);
+      }
+
+    });
   }
 }

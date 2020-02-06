@@ -43,28 +43,12 @@ export class LoginComponent implements OnInit {
       // this.router.navigate(['/']);
       const uid = response['user'].uid;
 
-      this.afterSignIn(uid);
+      this.authService.afterSignIn(uid);
 
     }).catch(err => {
       this.flash.show(err.message, {
         cssClass: 'alert-danger', timeout: 4000
       });
-    });
-  }
-
-
-  afterSignIn(uid) {
-    // check type of user and redirect accordingly
-    const client = this.clientService.get(uid);
-    client.valueChanges().subscribe(user => {
-      if ( user["isAdmin"] == true) {
-        // is admin to homepage
-        this.router.navigate(['/']);
-      } else {
-        // is vendor to vendor profile page
-        this.router.navigate(['/vendors/profile/' + uid]);
-      }
-
     });
   }
 
