@@ -21,6 +21,7 @@ export class ProductFormComponent implements OnInit {
   };
 
   id: string;
+  userID;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -30,6 +31,8 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    // get userID
+    this.userID = this.authService.getUserID();
     // fetch the categories for the meals
     this.categories$ = this.categoriesService.getCategories();
 
@@ -41,7 +44,7 @@ export class ProductFormComponent implements OnInit {
         .subscribe(p => {
           this.product = p;
           console.log(this.product);
-          });
+        });
     }
   }
 
@@ -49,18 +52,16 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit(product) {
     // get currentUser id
-    const userID = this.authService.getUserID();
-    if ( this.id) {
+    if (this.id) {
       // if we have an id,means we are updating a product
-      this.productService.updateProduct(userID, this.id, product);
+      this.productService.updateProduct(this.userID, this.id, product);
       this.flash.show('Product updated succesfully', {
         cssClass: 'alert-success',
         timeout: 5000
       });
     } else {
-
       // else create a product in firebase
-      this.productService.create(product, userID);
+      this.productService.create(product, this.userID);
       // show flash message
       // show flash message
       this.flash.show('Product created succesfully', {
@@ -69,7 +70,26 @@ export class ProductFormComponent implements OnInit {
       });
       // redirect to vendor dashboard
     }
-     // navigate to products page
+    // navigate to products page
     this.router.navigate(['/vendor/products/']);
+  }
+
+  deleteProduct() {
+    if (
+      confirm(
+        `Are you sure you want to delete ${this.product.title} product? this cannot be undone`
+      )
+    ) {
+      // remove product
+      this.productService.deleteProduct(this.userID, this.id, this.product);
+      // show flash message
+      this.flash.show('Product removed', {
+        cssClass: 'alert-success',
+        timeout: 4000
+      });
+
+      // navigate to dashboard
+      this.router.navigate(['/vendor/products']);
+    }
   }
 }

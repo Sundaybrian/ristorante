@@ -25,6 +25,11 @@ export class ProductService {
     return this.db.object('/products/' + userID + '/' + productID).update(product);
   }
 
+  deleteProduct(userID, productID, product) {
+    // delete product
+    this.db.object('/products/' + userID + '/' + productID).remove();
+  }
+
   getAll(userID) {
      // return all products of a logged in vendor
     this.products$ = this.db.list('/products/' + userID).snapshotChanges().pipe(
