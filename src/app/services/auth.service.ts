@@ -63,7 +63,7 @@ export class AuthService {
         this.router.navigate(['/']);
       } else {
         // is vendor to vendor profile page
-        this.router.navigate(['/vendor/profile/' + uid]);
+        this.router.navigate(['/vendor/products']);
       }
 
     });
