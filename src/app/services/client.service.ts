@@ -31,7 +31,7 @@ export class ClientService {
       // Get clients with the id
       this.clients = this.clientsRef.snapshotChanges().pipe(
         map( changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() as {} }))
         )
       );
 
@@ -66,7 +66,7 @@ export class ClientService {
          }
        }
      );
-   
+
       return user;
 
     }

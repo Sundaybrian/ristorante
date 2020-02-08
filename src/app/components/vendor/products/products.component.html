@@ -33,7 +33,7 @@
 [resizable]=true
 >
 <ng-template #dataTableCell let-item="item">
-{{ item.price }}
+{{ item.price | currency :"Ksh": "symbol"}}
 </ng-template>
 </data-table-column>
 
@@ -53,7 +53,7 @@
 [property]="'key'"
 >
 <ng-template #dataTableCell let-item="item">
-  <a routerLink="/vendor/products/edit/{{item.key}}">Edit</a>
+  <a [routerLink]="['/vendor/products/edit/',item.key]">Edit</a>
 </ng-template>
 </data-table-column
 >

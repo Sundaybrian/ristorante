@@ -34,7 +34,7 @@ export class ProductService {
      // return all products of a logged in vendor
     this.products$ = this.db.list('/products/' + userID).snapshotChanges().pipe(
       map( changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() as {} }))
       )
     );
 

@@ -17,7 +17,7 @@ export class CategoriesService {
   getCategories() {
     this.categories = this.db.list('categories').snapshotChanges().pipe(
       map( changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() as {} }))
       )
     );
 

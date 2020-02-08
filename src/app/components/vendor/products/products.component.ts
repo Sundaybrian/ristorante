@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe(products => {
         this.filteredProducts = this.products = products;
 
-        // initilaizing data table
+        // initilaizing datatable resource with the products
         this.initializeTable(products);
       });
   }
@@ -53,14 +53,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private initializeTable(products) {
+    // initialize table resource
     this.tableResource = new DataTableResource(products);
+    // display records in  current page i.e page 1
     this.tableResource.query({ offset: 0 }).then(items => (this.items = items));
-    // return total number of productas in a table
+    // return total number of products that we have
     this.tableResource.count().then(count => (this.itemCount = count));
   }
 
   reloadItems(params) {
+    // if a table param changes run this
+    // param can be a table page,sort,resize
+    // since reload is called when we launch and the resource is not yer initialized,we plug it if we dont have a resource instance
     if(!this.tableResource) return;
+
+    // call query method again to fetch new items(products)
     this.tableResource.query(params).then(items => (this.items = items));
 
   }

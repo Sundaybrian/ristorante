@@ -27,7 +27,7 @@ client: Client = {
 // blur field to adding a balance when creating a new client
 disableBalanceOnAdd = true;
 
-@ViewChild('clientForm', {static: false}) form: any;
+@ViewChild('clientForm') form: any;
 
   constructor(
     private flash: FlashMessagesService,
