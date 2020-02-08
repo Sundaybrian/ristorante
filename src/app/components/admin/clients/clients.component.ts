@@ -56,5 +56,18 @@ export class ClientsComponent implements OnInit {
   }
 
 
+  reloadItems(params) {
+    // if a table param changes run this
+    // param can be a table page,sort,resize
+    // since reload is called when we launch and the resource is not yer initialized,we plug it if we dont have a resource instance
+    if (!this.tableResource) return;
+
+    // call query method again to fetch new items(products)
+    this.tableResource.query(params).then(items => (this.items = items));
+  }
+
+
+
+
 
 }
