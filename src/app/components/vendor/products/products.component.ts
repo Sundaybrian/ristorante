@@ -3,7 +3,7 @@ import { ProductService } from "src/app/services/product.service";
 import { AuthService } from "src/app/services/auth.service";
 import { Subscription } from "rxjs";
 import { Product } from "src/app/models/product";
-import { DataTableResource } from "angular-4-data-table";
+import { DataTableResource } from "angular7-data-table";
 
 @Component({
   selector: "app-products",
@@ -57,5 +57,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.tableResource.query({ offset: 0 }).then(items => (this.items = items));
     // return total number of productas in a table
     this.tableResource.count().then(count => (this.itemCount = count));
+  }
+
+  reloadItems(params) {
+    if(!this.tableResource) return;
+    this.tableResource.query(params).then(items => (this.items = items));
+
   }
 }
