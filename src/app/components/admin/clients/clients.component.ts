@@ -1,37 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { ClientService } from 'src/app/services/client.service';
-import { Client } from 'src/app/models/Clients';
-import { DataTableResource } from 'angular7-data-table';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ClientService } from "src/app/services/client.service";
+import { Client } from "src/app/models/Clients";
+import { DataTableResource } from "angular7-data-table";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.css']
+  selector: "app-clients",
+  templateUrl: "./clients.component.html",
+  styleUrls: ["./clients.component.css"]
 })
-export class ClientsComponent implements OnInit {
-
+export class ClientsComponent implements OnInit, OnDestroy {
   clients: Client[];
   totalOwed: number;
   tableResource: DataTableResource<Client>;
+  clientsSubcription$: Subscription;
   items: Client[] = [];
   itemCount: number;
 
   constructor(private clientService: ClientService) {
-    // initiliaze datatable resource with the clients
-    this.initializeTable(this.clients);
+    this.clientsSubcription$ = this.clientService
+    .getClients()
+    .subscribe(clients => {
+      this.clients = clients;
 
+      this.getTotalOwed();
+
+      // initiliaze datatable resource with the clients
+      this.initializeTable(this.clients);
+      });
   }
 
-  ngOnInit() {
-    this.clientService.getClients().subscribe(
-      clients => {
-        this.clients = clients;
+  ngOnInit() {}
 
-        this.getTotalOwed();
-        console.log(this.clients);
-      }
-    );
 
+  ngOnDestroy() {
+    // manual unsubscribing from the products observable
+    this.clientsSubcription$.unsubscribe();
   }
 
   getTotalOwed() {
@@ -44,7 +48,6 @@ export class ClientsComponent implements OnInit {
 
   filter(query: string) {
     // filter the list of clients depending on the query
-
   }
 
   initializeTable(clients) {
@@ -55,7 +58,6 @@ export class ClientsComponent implements OnInit {
     this.tableResource.count().then(count => (this.itemCount = count));
   }
 
-
   reloadItems(params) {
     // if a table param changes run this
     // param can be a table page,sort,resize
@@ -65,9 +67,4 @@ export class ClientsComponent implements OnInit {
     // call query method again to fetch new items(products)
     this.tableResource.query(params).then(items => (this.items = items));
   }
-
-
-
-
-
 }
