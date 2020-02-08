@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-products',
@@ -10,8 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class ProductsComponent implements OnInit ,OnDestroy{
   id: string;
-  products: any[] = [];
-  filteredProducts: any[];
+  products: Product[] = [];
+  filteredProducts: Product[];
   productsSubscription: Subscription;
 
   constructor(

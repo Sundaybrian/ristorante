@@ -8,7 +8,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular-4-data-table';
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,6 +57,7 @@ import { ProductService } from './services/product.service';
   imports: [
     BrowserModule,
     FormsModule,
+    DataTableModule,
     CustomFormsModule,
     AppRoutingModule,
     FlashMessagesModule.forRoot(),
