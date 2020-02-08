@@ -48,6 +48,16 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   filter(query: string) {
     // filter the list of clients depending on the query
+     // if we have a query
+    // we filter the products array and update it with obj that match the query
+    // else we just return the initial products array
+    const filteredClients = query
+      ? this.clients.filter(p =>
+          p.firstName.toLowerCase().includes(query.toLowerCase())
+        )
+      : this.clients;
+    // fix for filtering for the data table
+    this.initializeTable(filteredClients);
   }
 
   initializeTable(clients) {
