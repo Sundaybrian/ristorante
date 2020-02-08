@@ -4,7 +4,7 @@ export interface Client{
   lastName?: string;
   email?: string;
   phone?: string;
-  balance?: number;
+  balance?: any;
   businessLocation?: string;
   businessName?: string;
   isVendor?: boolean;

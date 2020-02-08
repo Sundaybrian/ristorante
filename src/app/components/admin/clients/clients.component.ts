@@ -10,8 +10,8 @@ import { Subscription } from "rxjs";
   styleUrls: ["./clients.component.css"]
 })
 export class ClientsComponent implements OnInit, OnDestroy {
-  clients: Client[];
-  totalOwed: number;
+  clients: Client[] = [];
+  totalOwed: number = 0;
   tableResource: DataTableResource<Client>;
   clientsSubcription$: Subscription;
   items: Client[] = [];
@@ -22,15 +22,18 @@ export class ClientsComponent implements OnInit, OnDestroy {
     .getClients()
     .subscribe(clients => {
       this.clients = clients;
-
-      this.getTotalOwed();
+      console.log(this.clients);
 
       // initiliaze datatable resource with the clients
       this.initializeTable(this.clients);
+      this.getTotalOwed();
       });
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
 
   ngOnDestroy() {
@@ -42,6 +45,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
     // method to calculate balance owed
     // initial total is zero,loop against each cleint sium
     this.totalOwed = this.clients.reduce((total, client) => {
+      console.log(client);
       return total + parseFloat(client.balance.toString());
     }, 0);
   }
