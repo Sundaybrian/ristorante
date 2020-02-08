@@ -13,7 +13,6 @@ import { DataTableResource } from "angular7-data-table";
 export class ProductsComponent implements OnInit, OnDestroy {
   id: string;
   products: Product[] = [];
-  filteredProducts: Product[] = [];
   tableResource: DataTableResource<Product>;
   productsSubscription: Subscription;
   items: Product[] = [];
@@ -27,7 +26,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsSubscription = this.productService
       .getAll(this.id)
       .subscribe(products => {
-        this.filteredProducts = this.products = products;
+        this.products = products;
 
         // initilaizing datatable resource with the products
         this.initializeTable(products);
@@ -45,11 +44,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // if we have a query
     // we filter the products array and update it with obj that match the query
     // else we just return the initial products array
-    this.filteredProducts = query
+    let filteredProducts = query
       ? this.products.filter(p =>
           p.title.toLowerCase().includes(query.toLowerCase())
         )
       : this.products;
+    // fix for filtering for the data table
+    this.initializeTable(filteredProducts);
   }
 
   private initializeTable(products) {
@@ -65,10 +66,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // if a table param changes run this
     // param can be a table page,sort,resize
     // since reload is called when we launch and the resource is not yer initialized,we plug it if we dont have a resource instance
-    if(!this.tableResource) return;
+    if (!this.tableResource) return;
 
     // call query method again to fetch new items(products)
     this.tableResource.query(params).then(items => (this.items = items));
-
   }
 }
