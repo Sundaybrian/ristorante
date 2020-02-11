@@ -20,7 +20,7 @@
 
         <div class="navbar-nav">
           <ng-container  *ngIf="(currentUser$ | async )">
-            <a href="#" class="nav-item nav-link" *ngIf="!userObj.isAdmin">Settings</a>
+            <a href="#" class="nav-item nav-link" >Settings</a>
             <a (click)="onLogoutClick()" href="#" class="nav-item nav-link">Logout</a>
           </ng-container>
           <ng-container *ngIf="!(currentUser$ | async )">

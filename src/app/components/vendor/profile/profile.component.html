@@ -1,13 +1,21 @@
-<div class="row">
-  <div class="col-sm-4">
-    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="">
+<ul class="list-unstyled">
+
+</ul>
+<li class="card card-body mb-2">
+  <h3>Business Name:{{ client.businessName }}</h3>
+  <div class="row" *ngIf="client" >
+    <div class="col-sm-4">
+      <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="" class="img-fluid">
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li class="list-group-item">Name: {{client.firstName}} {{ client.lastName}}</li>
+        <li class="list-group-item">Contact Email: {{ client.email }}</li>
+        <li class="list-group-item">Contact Phone: {{ client.phone }}</li>
+      </ul>
+    </div>
+
   </div>
-  <div class="col-sm-8">
-    <h3>{{ user.firstName}} {{ user.lastName}}</h3>
-    <ul class="list-group">
-      <li class="list-group-item">Business Name</li>
-      <li class="list-group-item">Business Location</li>
-      <li class="list-group-item"></li>
-    </ul>
-  </div>
-</div>
+</li>
+

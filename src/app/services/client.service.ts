@@ -71,6 +71,7 @@ export class ClientService {
 
     }
 
+
     newClient2(uid: string, client: Client) {
       // delete password for the client obj
       delete client.password;
