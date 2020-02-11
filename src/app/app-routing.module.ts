@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'vendor/products/new', component: ProductFormComponent, canActivate: [AuthGuard]},
   { path: 'vendor/products/edit/:id', component: ProductFormComponent, canActivate: [AuthGuard]},
   { path: 'vendor/orders', component: OrdersComponent, canActivate: [AuthGuard]},
-  { path: 'vendor/profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'vendor/profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent}
 ];
