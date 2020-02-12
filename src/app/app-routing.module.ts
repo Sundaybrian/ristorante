@@ -14,6 +14,7 @@ import { OrdersComponent } from './components/vendor/orders/orders.component';
 import { ProfileComponent } from './components/vendor/profile/profile.component';
 import { AdminAuthGuard } from './guards/adminauth.guard';
 import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
+import { ProfileEditComponent } from './components/vendor/profile-edit/profile-edit.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'vendor/products/edit/:id', component: ProductFormComponent, canActivate: [AuthGuard]},
   { path: 'vendor/orders', component: OrdersComponent, canActivate: [AuthGuard]},
   { path: 'vendor/profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'vendor/profile/:id', component: ProfileEditComponent, canActivate: [AuthGuard]},
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent}
 ];

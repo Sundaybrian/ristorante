@@ -33,6 +33,7 @@ import { ProfileComponent } from './components/vendor/profile/profile.component'
 import { ProductFormComponent } from './components/vendor/product-form/product-form.component';
 import { CategoriesService } from './services/categories.service';
 import { ProductService } from './services/product.service';
+import { ProfileEditComponent } from './components/vendor/profile-edit/profile-edit.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { ProductService } from './services/product.service';
     ProductsComponent,
     OrdersComponent,
     ProfileComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,
