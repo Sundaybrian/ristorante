@@ -54,4 +54,20 @@ export class ProfileEditComponent implements OnInit,OnDestroy {
     this.client$.unsubscribe();
   }
 
+  onSubmit({value, valid}: {value: Client, valid: boolean}) {
+    // add client id
+    value.key = this.id
+
+    // update the vendor
+    this.clientService.updateClient(value);
+
+    // show flash message
+    this.flash.show('Your Details have been updated', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+
+    // navigate to vendor details
+    this.router.navigate(['/vendor/profile']);
+  }
+
 }
