@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-product-form',
@@ -23,13 +25,28 @@ export class ProductFormComponent implements OnInit {
   id: string;
   userID;
 
+  // main task
+  task: AngularFireUploadTask;
+
+  // progress monitoring
+  percentage: Observable<number>;
+
+  snapshot: any;
+
+  // downloadUrl
+  downloadURL: string;
+
+
+
   constructor(
     private categoriesService: CategoriesService,
     private productService: ProductService,
     private authService: AuthService,
     private flash: FlashMessagesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private afStorage: AngularFireStorage
+
   ) {
     // get userID
     this.userID = this.authService.getUserID();
@@ -49,6 +66,39 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  startUpload(event: FileList) {
+    // file object
+    const file = event.item(0);
+
+    // client side validation
+    if (file.type.split('/')[0] !== 'image') {
+      this.flash.show('Please upload a valid image', {
+        cssClass: 'alert-danger', timeout: 4000
+      });
+      return;
+    }
+
+    // the storage path
+    const path = `${this.id}/${new Date().getTime()}_${file.name}`;
+
+    // the main task
+    this.task = this.afStorage.upload(path, file);
+
+    // progress monitoring
+    this.percentage = this.task.percentageChanges();
+    this.snapshot = this.task.snapshotChanges().subscribe( action => {
+      console.log(action.downloadURL);
+    });
+
+    // file download url
+    // this.downloadURL = this.task.;
+  }
+
+   // Determines if the upload task is active
+   isActive(snapshot) {
+    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+  }
 
   onSubmit(product) {
     // get currentUser id

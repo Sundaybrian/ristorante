@@ -8,7 +8,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular7-data-table';
 import { environment } from 'src/environments/environment';
 
@@ -60,7 +59,6 @@ import { ProfileEditComponent } from './components/vendor/profile-edit/profile-e
     BrowserModule,
     FormsModule,
     DataTableModule.forRoot(),
-    CustomFormsModule,
     AppRoutingModule,
     FlashMessagesModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),

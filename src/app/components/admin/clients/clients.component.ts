@@ -22,7 +22,6 @@ export class ClientsComponent implements OnInit, OnDestroy {
     .getClients()
     .subscribe(clients => {
       this.clients = clients;
-      console.log(this.clients);
 
       // initiliaze datatable resource with the clients
       this.initializeTable(this.clients);
