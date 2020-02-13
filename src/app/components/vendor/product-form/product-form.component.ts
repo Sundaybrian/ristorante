@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 
 
 @Component({
@@ -31,10 +33,13 @@ export class ProductFormComponent implements OnInit {
   // progress monitoring
   percentage: Observable<number>;
 
-  snapshot: Observable<any>;
+  snapshot: Subscription;
 
   // downloadUrl
   downloadURL: Observable<string>;
+
+  // actual url string
+  @Input() url: string = '';
 
 
 
@@ -88,10 +93,15 @@ export class ProductFormComponent implements OnInit {
 
     // progress monitoring
     this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges();
+    this.snapshot = this.task.snapshotChanges().pipe(
+      finalize(() => {
+        // file download url
+        this.downloadURL = fileRef.getDownloadURL();
+        console.log(this.downloadURL);
+       } )
+   )
+  .subscribe();
 
-    // file download url
-    this.downloadURL = fileRef.getDownloadURL();
   }
 
    // Determines if the upload task is active

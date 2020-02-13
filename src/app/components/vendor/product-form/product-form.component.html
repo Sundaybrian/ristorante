@@ -74,9 +74,14 @@
           />
       </div>
 
+      <div class="form-group">
+        <label for="imageupload">
+          <progress max="100" [value]="(percentage  | async)"></progress>
+        </label>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+          <span class="input-group-text" id="inputGroupFileAddon01">Upload </span>
+
         </div>
         <div class="custom-file">
           <input type="file" class="custom-file-input" id="inputGroupFile01"
@@ -84,6 +89,7 @@
           aria-describedby="inputGroupFileAddon01">
           <label class="custom-file-label" for="inputGroupFile01">Choose image file</label>
         </div>
+      </div>
       </div>
 
       <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
@@ -93,8 +99,8 @@
   </div>
 
   <div class="col-md-6">
-    <div class="card" style="width: 18rem;" *ngIf="product.title">
-      <img [src]="product.imageUrl" class="card-img-top" alt="..." *ngIf="product.imageUrl">
+    <div class="card" style="width: 18rem;" >
+        <img [src]="url" class="card-img-top" alt="..." *ngIf="downloadURL | async as url">
       <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
         <p class="card-text">{{ product.price | currency:'KSH':'symbol'}}</p>
