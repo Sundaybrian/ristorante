@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -39,7 +39,7 @@ export class ProductFormComponent implements OnInit {
   downloadURL: Observable<string>;
 
   // actual url string
-  @Input() url: string = '';
+  url = '';
 
 
 
@@ -97,7 +97,6 @@ export class ProductFormComponent implements OnInit {
       finalize(() => {
         // file download url
         this.downloadURL = fileRef.getDownloadURL();
-        console.log(this.downloadURL);
        } )
    )
   .subscribe();

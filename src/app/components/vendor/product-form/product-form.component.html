@@ -67,10 +67,12 @@
         <label for="imageUrl">Image Url</label>
         <input
         type="text"
+        [value]="url"
         #imageUrl="ngModel"
         name="imageUrl"
         [(ngModel)]="product.imageUrl"
         class="form-control"
+        disabled
           />
       </div>
 
