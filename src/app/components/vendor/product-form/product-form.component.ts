@@ -31,10 +31,10 @@ export class ProductFormComponent implements OnInit {
   // progress monitoring
   percentage: Observable<number>;
 
-  snapshot: any;
+  snapshot: Observable<any>;
 
   // downloadUrl
-  downloadURL: string;
+  downloadURL: Observable<string>;
 
 
 
@@ -80,24 +80,23 @@ export class ProductFormComponent implements OnInit {
     }
 
     // the storage path
-    const path = `${this.id}/${new Date().getTime()}_${file.name}`;
+    const path = `${this.userID}/${new Date().getTime()}_${file.name}`;
+    const fileRef = this.afStorage.ref(path);
 
     // the main task
     this.task = this.afStorage.upload(path, file);
 
     // progress monitoring
     this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges().subscribe( action => {
-      console.log(action.downloadURL);
-    });
+    this.snapshot = this.task.snapshotChanges();
 
     // file download url
-    // this.downloadURL = this.task.;
+    this.downloadURL = fileRef.getDownloadURL();
   }
 
    // Determines if the upload task is active
    isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
   onSubmit(product) {
