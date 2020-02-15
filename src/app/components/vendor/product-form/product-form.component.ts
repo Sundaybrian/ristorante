@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -21,7 +21,8 @@ export class ProductFormComponent implements OnInit {
     title: '',
     price: 0,
     category: '',
-    imageUrl: ''
+    imageUrl: '',
+    downloadURL: '',
   };
 
   id: string;
@@ -38,8 +39,8 @@ export class ProductFormComponent implements OnInit {
   // downloadUrl
   downloadURL: Observable<string>;
 
-  // actual url string
-  url = '';
+  // actual url string from image card
+  @ViewChild('imageCard') url: ElementRef;
 
 
 
@@ -97,6 +98,7 @@ export class ProductFormComponent implements OnInit {
       finalize(() => {
         // file download url
         this.downloadURL = fileRef.getDownloadURL();
+        // s
        } )
    )
   .subscribe();
@@ -119,6 +121,8 @@ export class ProductFormComponent implements OnInit {
       });
     } else {
       // else create a product in firebase
+      // adding the url from firebase and binding to the product obj
+      product.downloadURL = this.url.nativeElement.src;
       this.productService.create(product, this.userID);
       // show flash message
       // show flash message
